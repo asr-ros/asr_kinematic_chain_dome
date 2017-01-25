@@ -1,0 +1,15 @@
+<launch>
+  <!-- Starts the guppy camera.-->
+  <include file = "$(find resources_for_vision)/launch/image_acquisition_pipelines/trunk/guppy_head_full_pbd.launch"/>
+  
+  <!-- Starts the flock of birds tracker system.-->
+  <include file = "$(find flock_of_birds)/launch/flock_of_birds_remote.launch"/>
+  
+  
+  <!-- Starts the PTU driver including parts of kinematic chain in Pbd Dome, it influences.-->
+  <include file = "$(find ptu_driver)/launch/ptu_left.launch"/>
+
+  <!-- Starts the robot state publisher with robot description from URDF.-->
+  <param name="robot_description" textfile="$(find asr_kinematic_chain_dome)/launch/dome.urdf" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
+</launch>

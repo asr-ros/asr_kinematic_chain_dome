@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<robot name="pdb_dome">
+  <link name="Root">
+    <visual>
+        <material name="tracker_color">
+          <color rgba="1 0 0 1.0" />
+        </material>
+        <geometry>
+          <box size="0.3 0.3 0.3" />
+        </geometry>
+        <origin xyz="-0.045 0.045 0.055" rpy="-0.05 0 0"/>
+      </visual>
+  </link>    
+  <link name="ptu_rot"/>
+  <link name="map"/>
+  <link name="camera_left_frame"/>
+  <link name="camera_right_frame"/>
+  <link name="ptu_tilted_link" />
+  <link name="ptu_pan_link_rotated" />
+  <link name="ptu_tilt_link">
+   <visual>
+        <material name="ptu_body_color">
+          <color rgba="0.3 0.3 0.3 1.0" />
+        </material>
+        <geometry>
+          <box size="0.045 0.065 0.044" />
+        </geometry>
+        <origin xyz="0 -0.0785 0" />
+      </visual>
+      <visual>
+        <geometry>
+          <box size="0.046 0.044 0.044" />
+        </geometry>
+        <origin xyz="-0.045 -0.0675 0" />
+      </visual>
+      <visual>
+        <geometry>
+          <cylinder length="0.015" radius="0.005" />
+        </geometry>
+        <origin xyz="-0.074 -0.0675 0" rpy="0 1.57079632679 0" />
+      </visual>
+    </link>
+  <link name="ptu_pan_link">
+     <visual>
+        <material name="ptu_body_color">
+          <color rgba="0.3 0.3 0.3 1.0" />
+        </material>DBNAME
+        <geometry>
+          <box size="0.045 0.065 0.044" />
+        </geometry>
+        <origin xyz="0 0.011 0.0225" />
+      </visual>
+      <visual>
+        <geometry>
+          <box size="0.046 0.044 0.044" />
+        </geometry>
+        <origin xyz="-0.045 0.0215 0.0225" />
+      </visual>
+      <visual>
+        <geometry>
+          <cylinder length="0.015" radius="0.005" />
+        </geometry>
+        <origin xyz="-0.074 0.021 0.0225" rpy="0 1.57079632679 0" />
+      </visual>
+            <visual>
+        <geometry>
+          <box size="0.06 0.15 0.01" />
+        </geometry>
+        <origin xyz="0 0 -0.005" />
+      </visual>
+         <visual>
+        <geometry>
+	  <mesh filename="package://object_database/rsc/databases/environment/Dome/Dome.dae" scale="0.1 0.1 0.1" />
+	</geometry>
+        <origin xyz="1.15 -0.3 -1.7325" rpy="1.57079632679 0.0 -0.780398163397"/>
+      </visual>
+      <visual>
+        <geometry>
+          <mesh filename="package://object_database/rsc/databases/environment/TableDome/TableDome.dae" scale="0.1 0.1 0.1" />
+        </geometry>
+        <origin xyz="1.25 0.35 -1.8" rpy="1.57079632679 0.0 -2.25619449019"/>
+      </visual>
+    </link>
+       
+    <joint name="base_to_ptu" type="fixed">
+        <parent link="ptu_rot"/>
+	<child link="Root"/>
+        <origin xyz="1.348513 1.456645 -0.451660" rpy="3.14159265359 0 -1.57079632679"/>
+    </joint>
+    <joint name="ptu_rot" type="fixed">
+        <parent link="ptu_pan_link"/>
+	<child link="ptu_rot"/>
+        <origin xyz="0 0 0" rpy="0.0174532925199 -0.0174532925199 -0.645771823238"/>
+    </joint>
+    <joint name="map_to_ptu" type="fixed">
+        <parent link="map"/>
+	<child link="ptu_pan_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <!-- The pan joint - rotates around y -->
+    <joint name="ptu_pan" type="revolute">
+      <parent link="ptu_pan_link" />
+      <origin xyz="0 0 0" rpy="-1.57079632679 0 0" />
+      <child link="ptu_pan_link_rotated" />
+      <axis xyz="0 1 0" rpy="0 0 0" />
+      <limit lower="-45" upper="45"
+             effort="30" velocity="1900"/>
+    </joint>
+
+    <!--static transformation between pan and tilt joint-->
+    <joint name="ptu_pan_to_tilt" type="fixed">
+      <parent link="ptu_pan_link_rotated" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <child link="ptu_tilt_link" />
+    </joint>
+
+    <!-- The tilt joint - rotates around y -->
+    <joint name="ptu_tilt" type="revolute">
+      <parent link="ptu_tilt_link" />
+      <origin xyz="0 0 0" rpy="-1.57079632679 0 0" />
+      <child link="ptu_tilted_link" />
+      <axis xyz="0 1 0" />
+      <limit lower="-46.647514" upper="31.012625"
+             effort="30" velocity="1900"/>
+    </joint>
+
+    <!-- Translates between z-Axes convention (z-Axes along optical axis for camera) -->
+    <!-- Defines camera offset to ptu base  -->
+    <joint name="mount_to_camera_right" type="fixed">
+        <parent link="ptu_tilted_link"/>
+        <child link="camera_right_frame"/>
+        <origin xyz="-0.003921 -0.050450 0.093300" rpy="-1.57079632679 0 -1.57079632679"/>
+    </joint>
+    <joint name="mount_to_camera_left" type="fixed">
+        <parent link="ptu_tilted_link"/>
+        <child link="camera_left_frame"/>
+	<origin xyz="-0.003921 0.050450 0.093300" rpy="-1.57079632679 0 -1.57079632679"/>
+    </joint>
+</robot>
