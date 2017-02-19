@@ -70,13 +70,13 @@
       </visual>
          <visual>
         <geometry>
-	  <mesh filename="package://object_database/rsc/databases/environment/Dome/Dome.dae" scale="0.1 0.1 0.1" />
+	  <mesh filename="package://asr_object_database/rsc/databases/environment/Dome/Dome.dae" scale="0.1 0.1 0.1" />
 	</geometry>
         <origin xyz="1.15 -0.3 -1.7325" rpy="1.57079632679 0.0 -0.780398163397"/>
       </visual>
       <visual>
         <geometry>
-          <mesh filename="package://object_database/rsc/databases/environment/TableDome/TableDome.dae" scale="0.1 0.1 0.1" />
+          <mesh filename="package://asr_object_database/rsc/databases/environment/TableDome/TableDome.dae" scale="0.1 0.1 0.1" />
         </geometry>
         <origin xyz="1.25 0.35 -1.8" rpy="1.57079632679 0.0 -2.25619449019"/>
       </visual>
