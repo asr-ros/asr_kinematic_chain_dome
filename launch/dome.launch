@@ -1,6 +1,6 @@
 <launch>  
   <!-- Starts the PTU driver including parts of kinematic chain in Pbd Dome, it influences.-->
-  <include file = "$(find ptu_driver)/launch/ptu_left.launch"/>
+  <include file = "$(find asr_flir_ptu_driver)/launch/ptu_left.launch"/>
 
   <!-- Starts the robot state publisher with robot description from URDF.-->
   <param name="robot_description" textfile="$(find asr_kinematic_chain_dome)/launch/dome.urdf" />
