@@ -3,7 +3,7 @@
   <include file = "$(find asr_resources_for_vision)/launch/image_acquisition_pipelines/trunk/guppy_head_full_pbd.launch"/>
   
   <!-- Starts the flock of birds tracker system.-->
-  <include file = "$(find flock_of_birds)/launch/flock_of_birds_remote.launch"/>
+  <include file = "$(find asr_flock_of_birds)/launch/flock_of_birds_remote.launch"/>
   
   
   <!-- Starts the PTU driver including parts of kinematic chain in Pbd Dome, it influences.-->
