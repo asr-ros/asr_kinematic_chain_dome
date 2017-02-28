@@ -2,7 +2,7 @@
 <package>
 	<name>asr_kinematic_chain_dome</name>
 	<version>1.0.0</version>
-	<description>This package provides information about the PbD dome's kinematic chain and contains launch-files to publish the chain to a robot_state_publisher</description>
+	<description>This package provides information about the PbD dome's kinematic chain and contains launch-files to publish the chain to a robot_state_publisher. Availible launchfiles are: dome with real PTU, dome with simulated PTU, dome with real PTU and Flock of Birds and additional transformation_publisher from guppy-cameras to the kinect cameras mounted above. It also contains the urdf model.</description>
 	<author>Heizmann Heinrich, Heller Florian, Meißner Pascal, Wittenbeck Valerij</author>
 	<maintainer email="asr-ros@lists.kit.edu">Meißner Pascal</maintainer>
 	<license>BSD</license>
